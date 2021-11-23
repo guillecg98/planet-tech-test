@@ -1,9 +1,23 @@
 import { Request, Response, Router } from "express";
+import cron from "node-cron";
+
+import { getCurrencyExchangeByCode } from "./currency/application";
+import { CurrencyAggregate } from "./currency/domain";
 import { CurrencyController } from "./currency";
 
 const appRouter: Router = Router();
 
 const currencyController = new CurrencyController();
+
+cron.schedule("*/1 * * * *", async () => {
+  // ---- CRON GETTING FOLLOWED CURRENCIES EVERY 5 MINUTES
+  const currencies = await currencyController.findAll();
+  currencies.map((currency: CurrencyAggregate) => {
+    getCurrencyExchangeByCode(currency.code)
+      .then((res) => console.debug(res.data))
+      .catch((e) => console.error(e));
+  });
+});
 
 appRouter.post("/currency", async (req: Request, res: Response) => {
   const newCurrency = await currencyController.add(
