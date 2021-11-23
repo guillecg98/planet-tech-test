@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import appRouter from "./app.router";
 require("dotenv").config();
 
 async function connectToDatabase(connectionUri: string) {
@@ -18,17 +19,18 @@ async function connectToDatabase(connectionUri: string) {
       });
   });
 }
+connectToDatabase(
+  `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@127.0.0.1:27017/${process.env.DB_NAME}?authSource=admin`
+);
 
 const app = express();
 const port = 3000;
+app.use(express.json());
+app.use(appRouter);
 
 app.get("/health", async (req, res) => {
   res.status(200).json({ healthy: true });
 });
-
-connectToDatabase(
-  `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@127.0.0.1:27017/${process.env.DB_NAME}?authSource=admin`
-);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}...`);
