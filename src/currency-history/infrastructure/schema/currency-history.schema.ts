@@ -9,6 +9,7 @@ const CurrencyHistorySchema = new Schema({
     {
       bid: Number,
       ask: Number,
+      spread: Number,
       date: Date,
     },
   ],
