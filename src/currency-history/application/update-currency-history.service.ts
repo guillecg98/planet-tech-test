@@ -14,8 +14,8 @@ export class UpdateCurrencyHistoryService {
       exchangeValues.data["Realtime Currency Exchange Rate"]["9. Ask Price"];
     const spread =
       Math.round(
-        (this.calculateSpread(bidParsed, askParsed) + Number.EPSILON) * 10000
-      ) / 10000;
+        (this.calculateSpread(bidParsed, askParsed) + Number.EPSILON) * 1000000
+      ) / 1000000;
 
     const historyWithMoreThanAnHour: CurrencyHistoryAggregate =
       await CurrencyHistory.findOne({
@@ -90,9 +90,9 @@ export class UpdateCurrencyHistoryService {
       ask: ask,
       spread: spread,
       date: date,
-      bidDiff: Math.round( ((bid - meanHourBid) + Number.EPSILON) * 10000) / 10000,
-      askDiff: Math.round( ((ask - meanHourAsk) + Number.EPSILON) * 10000) / 10000,
-      spreadDiff: Math.round( ((spread - meanHourSpread) + Number.EPSILON) * 10000) / 10000,
+      bidDiff: Math.round( ((bid - meanHourBid) + Number.EPSILON) * 1000000) / 1000000,
+      askDiff: Math.round( ((ask - meanHourAsk) + Number.EPSILON) * 1000000) / 1000000,
+      spreadDiff: Math.round( ((spread - meanHourSpread) + Number.EPSILON) * 1000000) / 1000000,
     };
 
     return calculatedValues;

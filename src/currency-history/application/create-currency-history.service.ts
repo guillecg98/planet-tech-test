@@ -13,8 +13,8 @@ export class CreateCurrencyHistoryService {
       exchangeValues.data["Realtime Currency Exchange Rate"]["9. Ask Price"];
     const spread =
       Math.round(
-        (this.calculateSpread(bidParsed, askParsed) + Number.EPSILON) * 10000
-      ) / 10000;
+        (this.calculateSpread(bidParsed, askParsed) + Number.EPSILON) * 1000000
+      ) / 1000000;
     const newCurrencyHistory = new CurrencyHistory({
       code: code,
       values: {
