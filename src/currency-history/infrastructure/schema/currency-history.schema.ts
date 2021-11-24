@@ -11,6 +11,9 @@ const CurrencyHistorySchema = new Schema({
       ask: Number,
       spread: Number,
       date: Date,
+      bidDiff: Number,
+      askDiff: Number,
+      spreadDiff: Number,
     },
   ],
 });

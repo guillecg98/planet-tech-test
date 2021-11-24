@@ -38,6 +38,7 @@ export class CurrencyHistoryController {
 
   async updateHistoryOf(code: string): Promise<void> {
     try {
+    //await this.updateCurrencyHistoryService.getLastHourValues(code);
       return await this.updateCurrencyHistoryService.update(code);
     } catch (e) {
       if (e instanceof Error) {

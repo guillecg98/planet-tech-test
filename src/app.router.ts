@@ -32,7 +32,7 @@ appRouter.delete("/currency/:code", async (req: Request, res: Response) => {
   res.send("Currency was removed");
 });
 
-cron.schedule("*/1 * * * *", async () => {
+cron.schedule("*/5 * * * *", async () => {
   // ---- CRON GETTING FOLLOWED CURRENCIES EVERY 5 MINUTES
   const currencies = await currencyController.findAll();
 

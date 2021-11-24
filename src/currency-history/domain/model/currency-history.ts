@@ -1,8 +1,11 @@
-type Values = {
+export type Values = {
   bid: number;
   ask: number;
   spread: number;
   date: Date;
+  bidDiff: number;
+  askDiff: number;
+  spreadDiff: number;
 };
 
 export class CurrencyHistoryAggregate {
